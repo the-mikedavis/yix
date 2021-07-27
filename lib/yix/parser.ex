@@ -1,4 +1,4 @@
-defmodule Yix.TreeSitterNif do
+defmodule Yix.Parser do
   @moduledoc false
 
   # A module which interfaces with the tree-sitter C code in `c_src/`
@@ -10,12 +10,12 @@ defmodule Yix.TreeSitterNif do
     :ok =
       :yix
       |> :code.priv_dir()
-      |> :filename.join('tree_sitter_nif')
+      |> :filename.join('parser')
       |> :erlang.load_nif(0)
   end
 
   # fallback API if the NIF fails to load
-  @failed_to_load_nif_message "NIF tree_sitter_nif could not be loaded"
+  @failed_to_load_nif_message "parser NIF could not be loaded"
 
   def parse(source, meta? \\ true)
 

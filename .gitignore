@@ -27,4 +27,4 @@ yix-*.tar
 
 /tree-sitter-*
 
-/priv/tree_sitter_nif.so
+/priv/parser.so

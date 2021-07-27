@@ -56,9 +56,7 @@ to_erl(ErlNifEnv *env, const char *source_code, TSNode node, bool include_meta)
   }
 
   /*
-   * {node_type,
-   *  [start_row: start_row, start_column: start_col, end_row: end_row, end_column: end_col],
-   *  children_or_value}
+   * {node_type, meta_kwlist, children_or_value}
    */
   return enif_make_tuple(env, 3,
     enif_make_atom(env, ts_node_type(node)),
@@ -106,14 +104,6 @@ parse(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
   root = ts_tree_root_node(tree);
 
-  /*
-  string = ts_node_string(root_node);
-  size_t output_size = (size_t) strlen(string);
-
-  enif_alloc_binary(output_size, &output);
-  memcpy(output.data, string, output_size);
-  */
-
 
   output = to_erl(env, source_code, root, include_meta);
 
@@ -127,4 +117,4 @@ static ErlNifFunc nif_funcs[] = {
   {"parse", 2, parse}
 };
 
-ERL_NIF_INIT(Elixir.Yix.TreeSitterNif, nif_funcs, NULL, NULL, NULL, NULL)
+ERL_NIF_INIT(Elixir.Yix.Parser, nif_funcs, NULL, NULL, NULL, NULL)

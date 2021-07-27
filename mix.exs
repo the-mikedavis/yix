@@ -3,7 +3,7 @@ defmodule Mix.Tasks.Compile.TreeSitterNif do
 
   def run(_args) do
     {stdout, exit_code} =
-      System.cmd("make", ["priv/tree_sitter_nif.so"], stderr_to_stdout: true)
+      System.cmd("make", ["priv/parser.so"], stderr_to_stdout: true)
 
     if exit_code == 0 do
       :ok

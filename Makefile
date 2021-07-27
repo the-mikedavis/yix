@@ -14,18 +14,18 @@ ifeq ($(shell uname),Darwin)
 	LDFLAGS += -dynamiclib -undefined dynamic_lookup
 endif
 
-.PHONY: all tree_sitter_nif clean
+.PHONY: all parser clean
 
-all: tree_sitter_nif
+all: parser
 
-tree_sitter_nif:
+parser:
 	$(MIX) compile
 
-priv/tree_sitter_nif.so: c_src/tree_sitter_nif.c
+priv/parser.so: c_src/parser.c
 	$(MAKE) -C $(TREE_SITTER_PATH) libtree-sitter.a
-	$(CC) $(CFLAGS) -shared $(LDFLAGS) c_src/tree_sitter_nif.c $(TREE_SITTER_LANGUAGE_PATH)/src/parser.c $(TREE_SITTER_LANGUAGE_PATH)/src/scanner.c $(TREE_SITTER_PATH)/libtree-sitter.a -o $@
+	$(CC) $(CFLAGS) -shared $(LDFLAGS) c_src/parser.c $(TREE_SITTER_LANGUAGE_PATH)/src/parser.c $(TREE_SITTER_LANGUAGE_PATH)/src/scanner.c $(TREE_SITTER_PATH)/libtree-sitter.a -o $@
 
 clean:
 	$(MIX) clean
 	$(MAKE) -C $(TREE_SITTER_PATH) clean
-	$(RM) priv/tree_sitter_nif.so
+	$(RM) priv/parser.so

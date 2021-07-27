@@ -25,6 +25,4 @@ yix-*.tar
 # Temporary files, for example, from tests.
 /tmp/
 
-/tree-sitter-*
-
 /priv/parser.so

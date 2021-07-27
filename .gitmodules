@@ -1,3 +1,6 @@
 [submodule "tree-sitter"]
 	path = tree-sitter
 	url = git@github.com:tree-sitter/tree-sitter.git
+[submodule "tree-sitter-nix"]
+	path = tree-sitter-nix
+	url = git@github.com:the-mikedavis/tree-sitter-nix.git

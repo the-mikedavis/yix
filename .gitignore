@@ -26,3 +26,5 @@ yix-*.tar
 /tmp/
 
 /tree-sitter-*
+
+/priv/tree_sitter_nif.so

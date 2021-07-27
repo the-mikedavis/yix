@@ -82,14 +82,15 @@ parse(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
   }
 
   include_meta_str = (char *) malloc(6);
-  if (enif_get_atom(env, argv[1], include_meta_str, 6, ERL_NIF_LATIN1) == 0) {
+  if (enif_get_atom(env, argv[1], include_meta_str, 6, ERL_NIF_LATIN1) == false) {
     return enif_make_badarg(env);
   }
 
   include_meta = strncmp(include_meta_str, "true", 4) == 0 ? true : false;
 
-  source_code = (char *) malloc(input.size);
+  source_code = (char *) malloc((size_t) input.size + 1);
   memcpy(source_code, input.data, input.size);
+  source_code[input.size] = 0;
 
   parser = ts_parser_new();
 

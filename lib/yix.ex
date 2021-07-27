@@ -1,18 +1,12 @@
 defmodule Yix do
-  @moduledoc """
-  Documentation for `Yix`.
-  """
+  defdelegate parse(source, include_meta? \\ true), to: Yix.Parser
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Yix.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def builtins do
+    %{
+      "add" => fn x -> fn y -> x + y end end,
+      "div" => fn x -> fn y -> div(x, y) end end
+    }
   end
+
+  defdelegate reduce(ast), to: Yix.Interpreter
 end

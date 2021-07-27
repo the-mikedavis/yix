@@ -1,8 +1,23 @@
+defmodule YixSigil do
+  def sigil_Y(content, _flags) do
+    content |> Yix.parse |> Yix.reduce
+  end
+end
+
 defmodule YixTest do
   use ExUnit.Case
-  doctest Yix
 
-  test "greets the world" do
-    assert Yix.hello() == :world
+  import YixSigil
+
+  describe "basic usage of builtins" do
+    test "builtins.add/2 adds two numbers" do
+      assert ~Y"builtins.add 1 2" == 1 + 2
+      assert ~Y"builtins.add 5 6" == 5 + 6
+    end
+
+    test "builtins.div/2 performs integer division" do
+      assert ~Y"builtins.div 3 2" == div(3, 2)
+      assert ~Y"builtins.div 3 2" == 1
+    end
   end
 end

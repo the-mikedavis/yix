@@ -105,7 +105,6 @@ parse(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
   root = ts_tree_root_node(tree);
 
-
   output = to_erl(env, source_code, root, include_meta);
 
   ts_tree_delete(tree);
@@ -115,7 +114,7 @@ parse(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 }
 
 static ErlNifFunc nif_funcs[] = {
-  {"parse", 2, parse}
+  {"nif_parse", 2, parse}
 };
 
 ERL_NIF_INIT(Elixir.Yix.Parser, nif_funcs, NULL, NULL, NULL, NULL)

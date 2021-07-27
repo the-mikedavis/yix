@@ -11,7 +11,7 @@ to_erl(ErlNifEnv *env, const char *source_code, TSNode node, bool include_meta)
   ERL_NIF_TERM children_term, meta_term;
   TSPoint start = ts_node_start_point(node);
   TSPoint end = ts_node_end_point(node);
-  uint32_t child_count = ts_node_named_child_count(node);
+  uint32_t child_count = ts_node_child_count(node);
 
   /* printf("Syntax tree with %d children: %s\n\n", child_count, ts_node_string(node)); */
 
@@ -26,7 +26,7 @@ to_erl(ErlNifEnv *env, const char *source_code, TSNode node, bool include_meta)
     uint32_t i;
 
     for (i = 0; i < child_count; i++) {
-      children[i] = to_erl(env, source_code, ts_node_named_child(node, i), include_meta);
+      children[i] = to_erl(env, source_code, ts_node_child(node, i), include_meta);
     }
 
     children_term = enif_make_list_from_array(env, children, child_count);

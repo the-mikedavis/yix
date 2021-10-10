@@ -20,4 +20,11 @@ defmodule YixTest do
       assert ~Y"builtins.div 3 2" == 1
     end
   end
+
+  describe "basic syntax" do
+    test "functions may be immediately applied to arguments" do
+      assert ~Y"(x: y: x + y) 1 2" == 3
+      assert ~Y"(x: y: x + y) 3 4" == 7
+    end
+  end
 end

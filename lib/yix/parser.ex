@@ -57,10 +57,19 @@ defmodule Yix.Parser do
     {operator, meta, [ast(lhs), ast(rhs)]}
   end
 
+  # perform a similar translation for unary operators
+  defp ast({:unary, meta, [{operator, _, _}, argument]}) do
+    {operator, meta, [ast(argument)]}
+  end
+
   # parse basic data types
   defp ast({:integer, _meta, integer_string}), do: String.to_integer(integer_string)
 
   defp ast({:float, _meta, float_string}), do: String.to_float(float_string)
+
+  defp ast({:identifier, _meta, "true"}), do: true
+  defp ast({:identifier, _meta, "false"}), do: false
+  defp ast({:identifier, _meta, "null"}), do: nil
 
   # rename :app to :apply (how do I do an ascii eye roll?)
   defp ast({:app, meta, [lhs, rhs]}) do

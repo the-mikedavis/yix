@@ -8,5 +8,5 @@ defmodule Yix do
     }
   end
 
-  defdelegate reduce(ast), to: Yix.Interpreter
+  def reduce(ast), do: Yix.Interpreter.reduce(ast).()
 end
